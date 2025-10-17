@@ -76,10 +76,20 @@
       <label class="check"><input type="checkbox" value="Unresponsive">Unresponsive</label>
       <label class="check"><input type="checkbox" value="Personal">Personal/life challenges</label>
     </div></div>
+
     <label>Active Goals (1–2 specific goals discussed)</label>
     <textarea id="active_goals" rows="3" placeholder="E.g., Build a consistent study routine, pass all classes, and apply for a job or internship."></textarea>
+
     <label>Progress Summary (3–5 sentences)</label>
     <textarea id="progress_summary" rows="5" placeholder="Summarize engagement, challenges, and wins."></textarea>
+
+    <!-- NEW SECTIONS -->
+    <label>Successes and Breakthroughs</label>
+    <textarea id="successes_breakthroughs" rows="4" placeholder="Describe recent achievements, improvements, or positive changes."></textarea>
+
+    <label>Concerns to Monitor</label>
+    <textarea id="concerns_monitor" rows="4" placeholder="List any ongoing challenges, risks, or behaviors to keep an eye on."></textarea>
+
     <div class="toolbar">
       <button id="btnMarkdown">Export Text</button>
       <button id="btnCopyMarkdown">Copy Text</button>
@@ -96,7 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
       coach:coach_name.value,student:student_name.value,week:week.value,date:date_of_note.value,
       status:academic_status.value,responsiveness:responsiveness.value,support:support_need.value,
       risks:Array.from(document.querySelectorAll('.group input[type="checkbox"]:checked')).map(x=>x.value),
-      goals:active_goals.value,summary:progress_summary.value};
+      goals:active_goals.value,summary:progress_summary.value,
+      successes:successes_breakthroughs.value,concerns:concerns_monitor.value};
   }
   function buildPlainText(d){
     const r=d.risks.length?d.risks.join('\\n'):'None';
@@ -119,6 +130,12 @@ ${d.goals||'—'}
 
 Progress Summary
 ${d.summary||'—'}
+
+Successes and Breakthroughs
+${d.successes||'—'}
+
+Concerns to Monitor
+${d.concerns||'—'}
 
 Exported ${new Date().toLocaleString()}`;}
   function downloadText(name,text){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text]));a.download=name;document.body.append(a);a.click();a.remove();}
