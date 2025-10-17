@@ -1,147 +1,132 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.1">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Digital AP Notes</title>
+<style>
+  body {
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #f7f7fb;
+    color: #1f2937;
+    margin: 0;
+    line-height: 1.5;
+  }
+  .wrap {
+    max-width: 880px;
+    margin: 32px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  h1 { text-align: center; font-size: 24px; margin-bottom: 20px; }
+  label { font-weight: bold; display: block; margin-top: 12px; margin-bottom: 4px; }
+  input[type="text"], input[type="date"], select, textarea {
+    width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px;
+    font-family: 'Times New Roman', Times, serif; font-size: 16px;
+  }
+  textarea { resize: vertical; }
+  .grid { display: grid; gap: 12px; }
+  @media (min-width: 700px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
+  .group { border: 1px dashed #ccc; padding: 10px; border-radius: 8px; margin-top: 8px; }
+  .checks { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .check { display: flex; align-items: center; gap: 8px; }
+  button {
+    background: #2563eb; color: white; border: none; border-radius: 8px;
+    padding: 10px 16px; font-family: 'Times New Roman', Times, serif;
+    font-size: 16px; cursor: pointer;
+  }
+  button.secondary { background: white; color: #2563eb; border: 1px solid #2563eb; }
+  .toolbar { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .toast {
+    position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%);
+    background: rgba(0,0,0,0.85); color: #fff; padding: 10px 14px;
+    border-radius: 8px; font-size: 14px; opacity: 0; pointer-events: none;
+    transition: opacity .25s ease; z-index: 1000;
+  }
+  .toast.show { opacity: 1; }
+</style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1">&lt;meta charset="utf-8" /&gt;</p>
-<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;</p>
-<p class="p1">&lt;title&gt;Digital AP Notes&lt;/title&gt;</p>
-<p class="p1">&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Times New Roman', Times, serif;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background-color: #f7f7fb;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: #1f2937;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin: 0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.5;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.wrap {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>max-width: 880px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin: 32px auto;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background: white;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>box-shadow: 0 4px 10px rgba(0,0,0,0.1);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>h1 { text-align: center; font-size: 24px; margin-bottom: 20px; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>label { font-weight: bold; display: block; margin-top: 12px; margin-bottom: 4px; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>input[type="text"], input[type="date"], select, textarea {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Times New Roman', Times, serif; font-size: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>textarea { resize: vertical; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.grid { display: grid; gap: 12px; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>@media (min-width: 700px) { .grid-2 { grid-template-columns: 1fr 1fr; } }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.group { border: 1px dashed #ccc; padding: 10px; border-radius: 8px; margin-top: 8px; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.checks { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.check { display: flex; align-items: center; gap: 8px; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>button {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background: #2563eb; color: white; border: none; border-radius: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 10px 16px; font-family: 'Times New Roman', Times, serif;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 16px; cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>button.secondary { background: white; color: #2563eb; border: 1px solid #2563eb; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.toolbar { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.toast {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background: rgba(0,0,0,0.85); color: #fff; padding: 10px 14px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 8px; font-size: 14px; opacity: 0; pointer-events: none;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>transition: opacity .25s ease; z-index: 1000;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.toast.show { opacity: 1; }</p>
-<p class="p1">&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="wrap"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h1&gt;Digital AP Notes&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;Success Coach Name&lt;/label&gt;&lt;input id="coach_name" type="text" placeholder="Enter coach name" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;Student Name&lt;/label&gt;&lt;input id="student_name" type="text" placeholder="Enter student name" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="grid grid-2"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;&lt;label&gt;Week in Term&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;select id="week"&gt;&lt;option value="" disabled selected&gt;Select week&lt;/option&gt;&lt;option&gt;Week 3&lt;/option&gt;&lt;option&gt;Week 7&lt;/option&gt;&lt;option&gt;Week 12&lt;/option&gt;&lt;/select&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;&lt;label&gt;Date of Note&lt;/label&gt;&lt;input id="date_of_note" type="date" /&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;Academic Status&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;select id="academic_status"&gt;&lt;option value="" disabled selected&gt;Select status&lt;/option&gt;&lt;option&gt;Performing Well&lt;/option&gt;&lt;option&gt;Needs Attention&lt;/option&gt;&lt;option&gt;At Risk&lt;/option&gt;&lt;/select&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;Responsiveness (1–4)&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;select id="responsiveness"&gt;&lt;option value="" disabled selected&gt;Select responsiveness&lt;/option&gt;&lt;option&gt;4 - Highly Responsive&lt;/option&gt;&lt;option&gt;3 - Responsive&lt;/option&gt;&lt;option&gt;2 - Inconsistent&lt;/option&gt;&lt;option&gt;1 - Unresponsive&lt;/option&gt;&lt;/select&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;Current Support Need&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;select id="support_need"&gt;&lt;option value="" disabled selected&gt;Select need&lt;/option&gt;&lt;option&gt;High&lt;/option&gt;&lt;option&gt;Medium&lt;/option&gt;&lt;option&gt;Low&lt;/option&gt;&lt;/select&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;Current Risk Factors (select all that apply)&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="group"&gt;&lt;div class="checks"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label class="check"&gt;&lt;input type="checkbox" value="Time management"&gt;Time management&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label class="check"&gt;&lt;input type="checkbox" value="Health"&gt;Mental or physical health&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label class="check"&gt;&lt;input type="checkbox" value="Work"&gt;Work or caregiving demands&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label class="check"&gt;&lt;input type="checkbox" value="Academic"&gt;Academic difficulty&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label class="check"&gt;&lt;input type="checkbox" value="Motivation"&gt;Low motivation&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label class="check"&gt;&lt;input type="checkbox" value="Tech"&gt;Technology or internet issues&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label class="check"&gt;&lt;input type="checkbox" value="Unresponsive"&gt;Unresponsive&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label class="check"&gt;&lt;input type="checkbox" value="Personal"&gt;Personal/life challenges&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;Active Goals (1–2 specific goals discussed)&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;textarea id="active_goals" rows="3" placeholder="E.g., Build a consistent study routine, pass all classes, and apply for a job or internship."&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;label&gt;Progress Summary (3–5 sentences)&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;textarea id="progress_summary" rows="5" placeholder="Summarize engagement, challenges, and wins."&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="toolbar"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;button id="btnMarkdown"&gt;Export Text&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;button id="btnCopyMarkdown"&gt;Copy Text&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="secondary" id="btnClear"&gt;Reset&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="toast" class="toast"&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;script&gt;</p>
-<p class="p1">document.addEventListener('DOMContentLoaded', () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">  </span>const toast = document.getElementById('toast');</p>
-<p class="p1"><span class="Apple-converted-space">  </span>function showToast(msg){toast.textContent=msg;toast.classList.add('show');setTimeout(()=&gt;toast.classList.remove('show'),1800);}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>function collectData(){</p>
-<p class="p1"><span class="Apple-converted-space">    </span>return {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>coach:coach_name.value,student:student_name.value,week:week.value,date:date_of_note.value,</p>
-<p class="p1"><span class="Apple-converted-space">      </span>status:academic_status.value,responsiveness:responsiveness.value,support:support_need.value,</p>
-<p class="p1"><span class="Apple-converted-space">      </span>risks:Array.from(document.querySelectorAll('.group input[type="checkbox"]:checked')).map(x=&gt;x.value),</p>
-<p class="p1"><span class="Apple-converted-space">      </span>goals:active_goals.value,summary:progress_summary.value};</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>function buildPlainText(d){</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const r=d.risks.length?d.risks.join('\\n'):'None';</p>
-<p class="p1"><span class="Apple-converted-space">    </span>return`Digital AP Notes</p>
-<p class="p1">Success Coach: ${d.coach||'—'}</p>
-<p class="p1">Student: ${d.student||'—'}</p>
-<p class="p1">Week: ${d.week||'—'}</p>
-<p class="p1">Date: ${d.date||'—'}</p>
-<p class="p2"><br></p>
-<p class="p1">Academic Overview</p>
-<p class="p1">Status: ${d.status||'—'}</p>
-<p class="p1">Responsiveness: ${d.responsiveness||'—'}</p>
-<p class="p1">Support Need: ${d.support||'—'}</p>
-<p class="p2"><br></p>
-<p class="p1">Current Risk Factors</p>
-<p class="p1">${r}</p>
-<p class="p2"><br></p>
-<p class="p1">Active Goals</p>
-<p class="p1">${d.goals||'—'}</p>
-<p class="p2"><br></p>
-<p class="p1">Progress Summary</p>
-<p class="p1">${d.summary||'—'}</p>
-<p class="p2"><br></p>
-<p class="p1">Exported ${new Date().toLocaleString()}`;}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>function downloadText(name,text){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text]));a.download=name;document.body.append(a);a.click();a.remove();}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>async function copyText(t){try{await navigator.clipboard.writeText(t);showToast('Copied to clipboard');}catch{showToast('Copy failed');}}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>btnMarkdown.onclick=()=&gt;{const d=collectData();downloadText(`digital_ap_notes_${(d.student||'entry').replace(/\\s+/g,'_')}.txt`,buildPlainText(d));showToast('Downloaded file');};</p>
-<p class="p1"><span class="Apple-converted-space">  </span>btnCopyMarkdown.onclick=()=&gt;copyText(buildPlainText(collectData()));</p>
-<p class="p1"><span class="Apple-converted-space">  </span>btnClear.onclick=()=&gt;{document.querySelectorAll('input,select,textarea').forEach(e=&gt;{if(e.type==='checkbox')e.checked=false;else e.value='';});showToast('Cleared');};</p>
-<p class="p1">});</p>
-<p class="p1">&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;&lt;/html&gt;</p>
+  <div class="wrap">
+    <h1>Digital AP Notes</h1>
+    <label>Success Coach Name</label><input id="coach_name" type="text" placeholder="Enter coach name" />
+    <label>Student Name</label><input id="student_name" type="text" placeholder="Enter student name" />
+    <div class="grid grid-2">
+      <div><label>Week in Term</label>
+        <select id="week"><option value="" disabled selected>Select week</option><option>Week 3</option><option>Week 7</option><option>Week 12</option></select>
+      </div>
+      <div><label>Date of Note</label><input id="date_of_note" type="date" /></div>
+    </div>
+    <label>Academic Status</label>
+    <select id="academic_status"><option value="" disabled selected>Select status</option><option>Performing Well</option><option>Needs Attention</option><option>At Risk</option></select>
+    <label>Responsiveness (1–4)</label>
+    <select id="responsiveness"><option value="" disabled selected>Select responsiveness</option><option>4 - Highly Responsive</option><option>3 - Responsive</option><option>2 - Inconsistent</option><option>1 - Unresponsive</option></select>
+    <label>Current Support Need</label>
+    <select id="support_need"><option value="" disabled selected>Select need</option><option>High</option><option>Medium</option><option>Low</option></select>
+    <label>Current Risk Factors (select all that apply)</label>
+    <div class="group"><div class="checks">
+      <label class="check"><input type="checkbox" value="Time management">Time management</label>
+      <label class="check"><input type="checkbox" value="Health">Mental or physical health</label>
+      <label class="check"><input type="checkbox" value="Work">Work or caregiving demands</label>
+      <label class="check"><input type="checkbox" value="Academic">Academic difficulty</label>
+      <label class="check"><input type="checkbox" value="Motivation">Low motivation</label>
+      <label class="check"><input type="checkbox" value="Tech">Technology or internet issues</label>
+      <label class="check"><input type="checkbox" value="Unresponsive">Unresponsive</label>
+      <label class="check"><input type="checkbox" value="Personal">Personal/life challenges</label>
+    </div></div>
+    <label>Active Goals (1–2 specific goals discussed)</label>
+    <textarea id="active_goals" rows="3" placeholder="E.g., Build a consistent study routine, pass all classes, and apply for a job or internship."></textarea>
+    <label>Progress Summary (3–5 sentences)</label>
+    <textarea id="progress_summary" rows="5" placeholder="Summarize engagement, challenges, and wins."></textarea>
+    <div class="toolbar">
+      <button id="btnMarkdown">Export Text</button>
+      <button id="btnCopyMarkdown">Copy Text</button>
+      <button class="secondary" id="btnClear">Reset</button>
+    </div>
+  </div>
+  <div id="toast" class="toast"></div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const toast = document.getElementById('toast');
+  function showToast(msg){toast.textContent=msg;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1800);}
+  function collectData(){
+    return {
+      coach:coach_name.value,student:student_name.value,week:week.value,date:date_of_note.value,
+      status:academic_status.value,responsiveness:responsiveness.value,support:support_need.value,
+      risks:Array.from(document.querySelectorAll('.group input[type="checkbox"]:checked')).map(x=>x.value),
+      goals:active_goals.value,summary:progress_summary.value};
+  }
+  function buildPlainText(d){
+    const r=d.risks.length?d.risks.join('\\n'):'None';
+    return`Digital AP Notes
+Success Coach: ${d.coach||'—'}
+Student: ${d.student||'—'}
+Week: ${d.week||'—'}
+Date: ${d.date||'—'}
+
+Academic Overview
+Status: ${d.status||'—'}
+Responsiveness: ${d.responsiveness||'—'}
+Support Need: ${d.support||'—'}
+
+Current Risk Factors
+${r}
+
+Active Goals
+${d.goals||'—'}
+
+Progress Summary
+${d.summary||'—'}
+
+Exported ${new Date().toLocaleString()}`;}
+  function downloadText(name,text){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text]));a.download=name;document.body.append(a);a.click();a.remove();}
+  async function copyText(t){try{await navigator.clipboard.writeText(t);showToast('Copied to clipboard');}catch{showToast('Copy failed');}}
+  btnMarkdown.onclick=()=>{const d=collectData();downloadText(`digital_ap_notes_${(d.student||'entry').replace(/\\s+/g,'_')}.txt`,buildPlainText(d));showToast('Downloaded file');};
+  btnCopyMarkdown.onclick=()=>copyText(buildPlainText(collectData()));
+  btnClear.onclick=()=>{document.querySelectorAll('input,select,textarea').forEach(e=>{if(e.type==='checkbox')e.checked=false;else e.value='';});showToast('Cleared');};
+});
+</script>
 </body>
 </html>
